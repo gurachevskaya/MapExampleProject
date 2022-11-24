@@ -1,0 +1,22 @@
+//
+//  MapDirectory.swift
+//  MapExampleProject
+//
+//  Created by Karina gurachevskaya on 23.11.22.
+//
+
+import Foundation
+
+struct MapDirectory {
+    let places: [Place] = {
+        guard let json = Bundle.main.url(forResource: "get_places", withExtension: ".json") else {
+            fatalError("Unable to load json")
+        }
+        do {
+            let jsonData = try Data(contentsOf: json)
+            return try JSONDecoder().decode([Place].self, from: jsonData)
+        } catch {
+            fatalError("Unable to load or parse json file from bundle")
+        }
+    }()
+}
