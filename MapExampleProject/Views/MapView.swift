@@ -10,51 +10,53 @@ import MapKit
 
 struct MapView: View {
     
-//    let location: Place
-//    let places: [Place]
+    let places: [Place]
+    
+    init(places: [Place]) {
+        self.places = places
+    }
     
     @StateObject private var locationManager = LocationManager()
-    @Environment(\.presentationMode) private var presentationMode
     @State private var locationError: Error?
-//    init(location: Place, places: [Place]) {
-//        self.location = location
-//        self.places = places
-//    }
     
     var body: some View {
-        ZStack {
-            Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
-            //        { item in
-            //        MapAnnotation(coordinate: item.location.coordinate) {
-            //          VStack {
-            //            Circle()
-            //              .fill(Color.red)
-            //            Text(item.name)
-            //              .fontWeight(.bold)
-            //          }
-            //        }
-            //      }
+        ZStack(alignment: .bottom) {
+            Map(coordinateRegion: $locationManager.region, showsUserLocation: true, annotationItems: places)
+            { item in
+                MapPin(coordinate: item.location.coordinate)
+            }
+            .edgesIgnoringSafeArea(.all)
+
+            Button {
+                withAnimation {
+                    locationManager.requestLocation()
+                }
+            } label: {
+                Label {
+                    Text("Current Location")
+                } icon: {
+                    Image(systemName: "location.fill")
+                }
+            }
+            .frame(width: 180, height: 40)
+            .background(Color.blue)
+            .cornerRadius(30)
+            .symbolVariant(.fill)
+            .foregroundColor(.white)
         }
         .onReceive(locationManager.$isAuthorized, perform: { newValue in
             locationError = newValue == false ? LocationError.notAuthorized : nil
         })
-//        .onChange(of: locationManager.$isAuthorized, perform: { newValue in
-//            if newValue == false {
-//                locationError = LocationError.notAuthorized
-//            }
-//        })
         .errorAlert(error: $locationError)
         .onAppear {
             locationManager.requestLocation()
         }
-        .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView()
+        MapView(places: MapDirectory().places)
     }
 }
 

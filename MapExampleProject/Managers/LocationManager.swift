@@ -18,8 +18,7 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
         center: CLLocationCoordinate2D(latitude: 42.0422448, longitude: -102.0079053),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
     )
-    @Published var isAuthorized: Bool = false
-//    @Published var authorizationStatus: CLAuthorizationStatus?
+    @Published var isAuthorized: Bool = true
 
     override init() {
         super.init()

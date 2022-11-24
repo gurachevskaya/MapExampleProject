@@ -9,7 +9,7 @@ import Foundation
 
 struct MapDirectory {
     let places: [Place] = {
-        guard let json = Bundle.main.url(forResource: "get_places", withExtension: ".json") else {
+        guard let json = Bundle.main.url(forResource: "places", withExtension: ".json") else {
             fatalError("Unable to load json")
         }
         do {

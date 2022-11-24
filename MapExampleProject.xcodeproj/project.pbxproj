@@ -11,11 +11,12 @@
 		1847FB27292E479B009A01B8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847FB26292E479B009A01B8 /* ContentView.swift */; };
 		1847FB29292E479D009A01B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1847FB28292E479D009A01B8 /* Assets.xcassets */; };
 		1847FB2C292E479D009A01B8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1847FB2B292E479D009A01B8 /* Preview Assets.xcassets */; };
-		1847FB34292E644A009A01B8 /* get_places.json in Sources */ = {isa = PBXBuildFile; fileRef = 1847FB33292E644A009A01B8 /* get_places.json */; };
+		1847FB34292E644A009A01B8 /* places.json in Sources */ = {isa = PBXBuildFile; fileRef = 1847FB33292E644A009A01B8 /* places.json */; };
 		18511AC8292EB6B900A8DD74 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18511AC7292EB6B900A8DD74 /* MapView.swift */; };
 		18511ACA292EB6D300A8DD74 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18511AC9292EB6D300A8DD74 /* Place.swift */; };
 		18511ACD292EB8A200A8DD74 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18511ACC292EB8A200A8DD74 /* LocationManager.swift */; };
 		18511ACF292EB9BD00A8DD74 /* MapDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18511ACE292EB9BD00A8DD74 /* MapDirectory.swift */; };
+		18511AD2292FA1C900A8DD74 /* places.json in Resources */ = {isa = PBXBuildFile; fileRef = 1847FB33292E644A009A01B8 /* places.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +25,7 @@
 		1847FB26292E479B009A01B8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1847FB28292E479D009A01B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1847FB2B292E479D009A01B8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1847FB33292E644A009A01B8 /* get_places.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_places.json; sourceTree = "<group>"; };
+		1847FB33292E644A009A01B8 /* places.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = places.json; sourceTree = "<group>"; };
 		18511AC7292EB6B900A8DD74 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		18511AC9292EB6D300A8DD74 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		18511ACC292EB8A200A8DD74 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -83,7 +84,7 @@
 		1847FB32292E6429009A01B8 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				1847FB33292E644A009A01B8 /* get_places.json */,
+				1847FB33292E644A009A01B8 /* places.json */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -172,6 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18511AD2292FA1C900A8DD74 /* places.json in Resources */,
 				1847FB2C292E479D009A01B8 /* Preview Assets.xcassets in Resources */,
 				1847FB29292E479D009A01B8 /* Assets.xcassets in Resources */,
 			);
@@ -188,7 +190,7 @@
 				18511AC8292EB6B900A8DD74 /* MapView.swift in Sources */,
 				18511ACD292EB8A200A8DD74 /* LocationManager.swift in Sources */,
 				18511ACF292EB9BD00A8DD74 /* MapDirectory.swift in Sources */,
-				1847FB34292E644A009A01B8 /* get_places.json in Sources */,
+				1847FB34292E644A009A01B8 /* places.json in Sources */,
 				1847FB25292E479B009A01B8 /* MapExampleProjectApp.swift in Sources */,
 				18511ACA292EB6D300A8DD74 /* Place.swift in Sources */,
 			);
@@ -247,7 +249,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -301,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

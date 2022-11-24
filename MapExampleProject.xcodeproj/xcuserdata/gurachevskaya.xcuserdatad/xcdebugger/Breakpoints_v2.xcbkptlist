@@ -14,8 +14,8 @@
             filePath = "MapExampleProject/Managers/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "requestLocation()"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,26 +30,10 @@
             filePath = "MapExampleProject/Managers/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "locationManager(_:didUpdateLocations:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2ABAB809-615E-4F0F-8244-BE416C31A5B2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MapExampleProject/Views/MapView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "body"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -62,8 +46,8 @@
             filePath = "MapExampleProject/Managers/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "locationManagerDidChangeAuthorization(_:)"
             landmarkType = "7">
          </BreakpointContent>
