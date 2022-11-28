@@ -7,23 +7,44 @@
 
 import MapKit
 import SwiftUI
+import Combine
 
 struct MapView: UIViewRepresentable {
     
+    private let view = MKMapView()
+
     var places: [PlaceAnnotation]
-    @Binding var currentLocation : CLLocationCoordinate2D
     
     class Coordinator: NSObject, MKMapViewDelegate {
         
         var parent: MapView
+        private var lastUserLocation: CLLocationCoordinate2D?
+        private var cancellables: Set<AnyCancellable> = []
         
         init(_ parent: MapView) {
             self.parent = parent
+            super.init()
+            
+            subscribeToLocationUpdates()
         }
         
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             guard let annotation = annotation as? PlaceAnnotation else { return nil }
             return AnnotationView(annotation: annotation, reuseIdentifier: AnnotationView.reuseID)
+        }
+        
+        func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+            lastUserLocation = userLocation.coordinate
+        }
+        
+        private func subscribeToLocationUpdates() {
+            NotificationCenter.default.publisher(for: .goToCurrentLocation)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] output in
+                    guard let lastUserLocation = self?.lastUserLocation else { return }
+                    self?.parent.view.setCenter(lastUserLocation, animated: true)
+                }
+                .store(in: &cancellables)
         }
     }
     
@@ -32,27 +53,16 @@ struct MapView: UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> MKMapView {
-        let view = MKMapView()
         view.delegate = context.coordinator
         view.mapType = .standard
-        
+        view.showsUserLocation = true
+        view.addAnnotations(places)
+
         return view
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        if places.count != uiView.annotations.count {
-            uiView.removeAnnotations(uiView.annotations)
-            uiView.addAnnotations(places)
-        }
-        uiView.showsUserLocation = true
-        uiView.setCenter(currentLocation, animated: true)
     }
-    
-    //    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-    //        if !mapView.showsUserLocation {
-    //            parent.centerCoordinate = mapView.centerCoordinate
-    //        }
-    //    }
 }
 
 class AnnotationView: MKMarkerAnnotationView {

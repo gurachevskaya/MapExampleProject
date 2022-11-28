@@ -17,16 +17,15 @@ struct MainView: View {
     
     @StateObject private var locationManager = LocationManager()
     @State private var locationError: Error?
-    @State private var currentLocation = CLLocationCoordinate2D()
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
-            MapView(places: mapPlaces(places), currentLocation: $currentLocation)
+            MapView(places: mapPlaces(places))
                 .edgesIgnoringSafeArea(.all)
             
             Button {
                 withAnimation {
-                    getCurrentLocation()
+                    goToUserLocation()
                 }
             } label: {
                 Label {
@@ -41,14 +40,9 @@ struct MainView: View {
             .symbolVariant(.fill)
             .foregroundColor(.white)
         }
-        .onReceive(locationManager.$isAuthorized, perform: { newValue in
+        .onReceive(locationManager.$isAuthorized) { newValue in
             locationError = newValue == false ? LocationError.notAuthorized : nil
-        })
-        .onReceive(locationManager.$location, perform: { newValue in
-            if let newValue = newValue {
-                currentLocation = newValue
-            }
-        })
+        }
         .errorAlert(error: $locationError)
         .onAppear {
             locationManager.requestLocation()
@@ -61,14 +55,8 @@ struct MainView: View {
         }
     }
     
-    func getCurrentLocation() {
-        if !locationManager.isAuthorized {
-//            locationManager.requestWhenInUseAuthorization()
-            locationManager.requestLocation()
-        }
-        if let location = locationManager.location {
-            currentLocation = location
-        }
+    private func goToUserLocation() {
+        NotificationCenter.default.post(name: .goToCurrentLocation, object: nil)
     }
 }
 

@@ -13,7 +13,7 @@ import Combine
 final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     
-    @Published var location: CLLocationCoordinate2D?
+    @Published var location = CLLocationCoordinate2D()
     @Published var isAuthorized: Bool = true
 
     override init() {
