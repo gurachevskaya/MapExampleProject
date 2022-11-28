@@ -17,21 +17,16 @@ struct MainView: View {
     
     @StateObject private var locationManager = LocationManager()
     @State private var locationError: Error?
+    @State private var currentLocation = CLLocationCoordinate2D()
     
     var body: some View {
         ZStack(alignment: .bottom) {
-//            Map(coordinateRegion: $locationManager.region, showsUserLocation: true, annotationItems: places)
-//            { item in
-//                MapPin(coordinate: item.location.coordinate)
-//            }
-//            .edgesIgnoringSafeArea(.all)
-            
-            MapView(places: mapPlaces(places))
+            MapView(places: mapPlaces(places), currentLocation: $currentLocation)
                 .edgesIgnoringSafeArea(.all)
-
+            
             Button {
                 withAnimation {
-                    locationManager.requestLocation()
+                    getCurrentLocation()
                 }
             } label: {
                 Label {
@@ -49,6 +44,11 @@ struct MainView: View {
         .onReceive(locationManager.$isAuthorized, perform: { newValue in
             locationError = newValue == false ? LocationError.notAuthorized : nil
         })
+        .onReceive(locationManager.$location, perform: { newValue in
+            if let newValue = newValue {
+                currentLocation = newValue
+            }
+        })
         .errorAlert(error: $locationError)
         .onAppear {
             locationManager.requestLocation()
@@ -58,6 +58,16 @@ struct MainView: View {
     private func mapPlaces(_ places: [Place]) -> [PlaceAnnotation] {
         places.map {
             PlaceAnnotation(title: $0.name, coordinate: $0.location)
+        }
+    }
+    
+    func getCurrentLocation() {
+        if !locationManager.isAuthorized {
+//            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
+        }
+        if let location = locationManager.location {
+            currentLocation = location
         }
     }
 }

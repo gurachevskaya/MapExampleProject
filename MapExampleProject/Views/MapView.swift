@@ -11,13 +11,7 @@ import SwiftUI
 struct MapView: UIViewRepresentable {
     
     var places: [PlaceAnnotation]
-    
-//    @State private var region = MKCoordinateRegion(
-//        center: CLLocationCoordinate2D(
-//            latitude: 43.64422936785126, longitude: 142.39329541313924
-//        ),
-//        span: MKCoordinateSpan(latitudeDelta: 1.5, longitudeDelta: 2)
-//    )
+    @Binding var currentLocation : CLLocationCoordinate2D
     
     class Coordinator: NSObject, MKMapViewDelegate {
         
@@ -32,7 +26,7 @@ struct MapView: UIViewRepresentable {
             return AnnotationView(annotation: annotation, reuseIdentifier: AnnotationView.reuseID)
         }
     }
-        
+    
     func makeCoordinator() -> Coordinator {
         MapView.Coordinator(self)
     }
@@ -40,15 +34,25 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let view = MKMapView()
         view.delegate = context.coordinator
-//        view.setRegion(region, animated: false)
         view.mapType = .standard
-        view.addAnnotations(places)
         
         return view
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        if places.count != uiView.annotations.count {
+            uiView.removeAnnotations(uiView.annotations)
+            uiView.addAnnotations(places)
+        }
+        uiView.showsUserLocation = true
+        uiView.setCenter(currentLocation, animated: true)
     }
+    
+    //    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+    //        if !mapView.showsUserLocation {
+    //            parent.centerCoordinate = mapView.centerCoordinate
+    //        }
+    //    }
 }
 
 class AnnotationView: MKMarkerAnnotationView {
